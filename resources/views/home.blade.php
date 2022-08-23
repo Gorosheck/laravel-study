@@ -10,9 +10,7 @@
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam delectus dolor ducimus earum ipsa nesciunt quas ullam? Beatae commodi consequatur ea, enim est iste maiores non praesentium reiciendis voluptatem. Possimus.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam delectus dolor ducimus earum ipsa nesciunt quas ullam? Beatae commodi consequatur ea, enim est iste maiores non praesentium reiciendis voluptatem. Possimus.</p>
 
-@endsection
 
-@section('content-block-home')
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>

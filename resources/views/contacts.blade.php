@@ -5,9 +5,8 @@
 @section('content')
 <h1>Контакты</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam cum eaque eligendi eveniet facilis hic ipsam quae similique. Adipisci aperiam aut cumque doloremque eaque explicabo incidunt omnis perferendis vel vero.</p>
-@endsection
 
-@section('contact-form')
+
     <h2>Форма обратной связи</h2>
 
     <form>
