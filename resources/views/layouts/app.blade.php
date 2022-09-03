@@ -19,6 +19,7 @@
         </ul>
     </header>
 </div>
+@include('flash-messages')
 @yield('content')
 
 </body>

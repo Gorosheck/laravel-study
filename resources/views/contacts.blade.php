@@ -8,22 +8,36 @@
 
 
     <h2>Форма обратной связи</h2>
+@if ($errors->any())
+    <div class="alert alert-danger">Error!</div>
+@endif
+    <form action="{{ route('report_store') }}" method="post">
+        @csrf
+        <div class="form-group w-50">
+            <label for="name">{{ __('validation.attributes.name') }}</label>
+            <input value="{{ old('name') }}" name="name" type="text" class="form-control @error('name') is-invalid @enderror">
+            @error('name')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
 
-    <form>
-        <div class="input-group input-group-lg mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-lg">Name</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+        <div class="form-group w-50">
+            <label for="email">{{ __('validation.attributes.email') }}</label>
+            <input value="{{ old('email') }}" name="email" type="email" class="form-control @error('email') is-invalid @enderror">
+            @error('email')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
-        <div class="input-group input-group-lg mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-lg">E-mail</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-        </div>
-        <div class="input-group input-group-lg mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-lg">Tel</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+        <div class="form-group w-50">
+            <label for="tel">{{ __('validation.attributes.tel') }}</label>
+            <input value="{{ old('tel') }}" name="tel" type="tel" class="form-control @error('tel') is-invalid @enderror">
+            @error('tel')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 @endsection
+
