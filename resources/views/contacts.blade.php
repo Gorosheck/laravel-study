@@ -11,7 +11,7 @@
 @if ($errors->any())
     <div class="alert alert-danger">Error!</div>
 @endif
-    <form action="{{ route('report_store') }}" method="post">
+    <form action="{{ route('contact_store') }}" method="post">
         @csrf
         <div class="form-group w-50">
             <label for="name">{{ __('validation.attributes.name') }}</label>

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewReport extends Mailable
+class NewContact extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,6 +32,6 @@ class NewReport extends Mailable
     {
         return $this
             ->subject('Hello! This new report!')
-            ->view('emails.new_report');
+            ->view('emails.new_contact');
     }
 }
