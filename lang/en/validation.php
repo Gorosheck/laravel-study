@@ -166,6 +166,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'Name',
+        'email' => 'Email',
+        'tel' => 'Tel',
+    ],
 
 ];
