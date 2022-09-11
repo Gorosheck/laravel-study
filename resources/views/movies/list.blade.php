@@ -23,12 +23,12 @@
                     <a href="{{ route('movie.show', ['movie' => $movie->id]) }}">Смотреть</a>
                     <br>
                     <a href="{{ route('movie.edit.form', ['movie' => $movie->id]) }}">Редактировать</a>
-{{--                    <form action="{{ route('movie.delete', ['movie' => $movie->id]) }}" method="post">--}}
-{{--                        @csrf--}}
-{{--                        <button type="submit" class="btn btn-outline-danger">--}}
-{{--                            Удалить--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
+                    <form action="{{ route('movie.delete', ['movie' => $movie->id]) }}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger">
+                            Удалить
+                        </button>
+                    </form>
                 </td>
             </tr>
         @endforeach

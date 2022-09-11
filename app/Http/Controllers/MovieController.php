@@ -53,4 +53,12 @@ class MovieController extends Controller
     {
         return view('movies.show', compact('movie'));
     }
+
+    public function delete(Movie $movie)
+    {
+        $movie->delete();
+
+        session()->flash('success', 'Deleted successfully!');
+        return redirect()->route('movie.list');
+    }
 }

@@ -45,9 +45,11 @@ Route::group(['prefix' => '/movies', 'as' => 'movie.'], function() {
 
         Route::post('', [MovieController::class, 'edit'])
             ->name('edit');
+
+
     });
 
+    Route::post('/{movie}/delete', [MovieController::class, 'delete'])
+        ->name('delete');
 
-//    Route::post('/{movie}/delete', [MovieController::class, 'delete'])
-//        ->name('delete');
 });
