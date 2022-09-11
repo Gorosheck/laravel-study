@@ -170,6 +170,9 @@ return [
         'name' => 'Name',
         'email' => 'Email',
         'tel' => 'Tel',
+        'title_movie' => 'Title Film',
+        'description' => 'Description',
+        'year' => 'Year',
     ],
 
 ];
