@@ -28,7 +28,7 @@ class MovieController extends Controller
 
         session()->flash('success', 'Success!');
 
-        return redirect()->route('movie.show', ['movie' => $movie->id]);
+        return redirect()->route('movie.show', compact('movie'));
     }
 
     public function edit(Movie $movie, EditRequest $request)
@@ -39,14 +39,14 @@ class MovieController extends Controller
 
         session()->flash('success', 'Success!');
 
-        return redirect()->route('movie.show', ['movie' => $movie->id]);
+        return redirect()->route('movie.show', compact('movie'));
     }
 
     public function list(Request $request)
     {
         $movies = Movie::all();
 
-        return view('movies.list', ['movies' => $movies]);
+        return view('movies.list', compact('movies'));
     }
 
     public function show(Movie $movie)
