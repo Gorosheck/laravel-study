@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
@@ -22,3 +23,33 @@ Route::get('/contacts', [MainController::class, 'contacts'])->name('contacts');
 Route::get('/about', [MainController::class, 'about'])->name('about');
 
 Route::post('/contacts', [ContactController::class, 'store'])->name('contact_store');
+
+
+Route::group(['prefix' => '/movies', 'as' => 'movie.'], function() {
+    Route::get('', [MovieController::class, 'list'])
+        ->name('list');
+
+    Route::get('/create', [MovieController::class, 'createForm'])
+        ->name('create.form');
+
+    Route::post('/create', [MovieController::class, 'create'])
+        ->name('create');
+
+    Route::get('/{movie}', [MovieController::class, 'show'])
+        ->name('show');
+
+
+    Route::group(['prefix' => '/{movie}/edit'], function () {
+        Route::get('', [MovieController::class, 'editForm'])
+            ->name('edit.form');
+
+        Route::post('', [MovieController::class, 'edit'])
+            ->name('edit');
+
+
+    });
+
+    Route::post('/{movie}/delete', [MovieController::class, 'delete'])
+        ->name('delete');
+
+});

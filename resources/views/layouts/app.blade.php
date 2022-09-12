@@ -16,6 +16,8 @@
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link active" aria-current="page">Главная</a></li>
             <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">О компании</a></li>
             <li class="nav-item"><a href="{{ route('contacts') }}" class="nav-link">Контакты</a></li>
+            <li class="nav-item"><a href="{{ route('movie.list') }}" class="nav-link">Фильмы</a></li>
+            <li class="nav-item"><a href="{{ route('movie.create') }}" class="nav-link">Добавить фильм</a></li>
         </ul>
     </header>
 </div>
