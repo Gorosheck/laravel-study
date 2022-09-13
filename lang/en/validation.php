@@ -173,6 +173,8 @@ return [
         'title_movie' => 'Title Film',
         'description' => 'Description',
         'year' => 'Year',
+        'password' => 'Password',
+        'password_confirmation' => 'Confirm Password',
     ],
 
 ];
