@@ -18,6 +18,7 @@
             <li class="nav-item"><a href="{{ route('contacts') }}" class="nav-link">Контакты</a></li>
             <li class="nav-item"><a href="{{ route('movie.list') }}" class="nav-link">Фильмы</a></li>
             <li class="nav-item"><a href="{{ route('movie.create') }}" class="nav-link">Добавить фильм</a></li>
+            <li class="nav-item"><a href="{{ route('sign-up.form') }}" class="nav-link">Регистрация</a></li>
         </ul>
     </header>
 </div>
