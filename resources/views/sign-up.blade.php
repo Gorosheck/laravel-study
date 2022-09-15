@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sign Up')
+@section('title-block')Регистрация@endsection
 
 @section('content')
     <div class="row">
@@ -36,6 +36,16 @@
                 <input value="{{ old('password_confirmation') }}" name="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror">
                 @error('password_confirmation')
                 <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-check">
+                <label class="form-check-label" for="flexCheckIndeterminate">
+                {{ __('validation.attributes.checkbox') }}
+            </label>
+            <input class="form-check-input @error('checkbox') is-invalid @enderror" type="checkbox"  name="checkbox">
+            @error('checkbox')
+            <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 

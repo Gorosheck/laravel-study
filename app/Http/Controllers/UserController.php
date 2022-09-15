@@ -26,7 +26,7 @@ class UserController extends Controller
 
         session()->flash('success', 'Success!');
 
-        return redirect()->route('main');
+        return redirect()->route('home');
     }
 
     public function verifyEmail(string $id, string $hash, Request $request)
@@ -46,7 +46,7 @@ class UserController extends Controller
 
         session()->flash('success', 'Success!');
 
-        return redirect()->route('main');
+        return redirect()->route('home');
     }
 
 }

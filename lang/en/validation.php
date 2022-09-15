@@ -175,6 +175,7 @@ return [
         'year' => 'Year',
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
+        'checkbox' => 'Agree',
     ],
 
 ];

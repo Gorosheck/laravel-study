@@ -27,6 +27,7 @@ class SignUpRequest extends FormRequest
             'name' => ['required', 'string', 'min:1', 'max:255'],
             'email' => ['required', 'email:rfc', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'max:25', 'confirmed'],
+            'checkbox' => ['required', 'accepted'],
         ];
     }
 }
