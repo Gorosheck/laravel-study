@@ -16,9 +16,48 @@
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link active" aria-current="page">Главная</a></li>
             <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">О компании</a></li>
             <li class="nav-item"><a href="{{ route('contacts') }}" class="nav-link">Контакты</a></li>
-            <li class="nav-item"><a href="{{ route('movie.list') }}" class="nav-link">Фильмы</a></li>
-            <li class="nav-item"><a href="{{ route('movie.create') }}" class="nav-link">Добавить фильм</a></li>
             <li class="nav-item"><a href="{{ route('sign-up.form') }}" class="nav-link">Регистрация</a></li>
+            <li class="nav-item"><a class="nav-link"  href="{{  route('login') }}">Войти</a></li>
+
+            @if (auth()->check())
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Фильмы
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('movie.list') }}">Список фильмов</a></li>
+                        <li><a class="dropdown-item" href="{{ route('movie.create') }}">Добавить фильм</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Жанры
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('genres.list') }}">Список жанров</a></li>
+                        <li><a class="dropdown-item" href="{{ route('genres.create.genre') }}">Добавить жанр</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Актеры
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('actors.list') }}">Список актеров</a></li>
+                        <li><a class="dropdown-item" href="{{ route('actors.create.actor') }}">Добавить актера</a></li>
+                    </ul>
+                </li>
+            @endif
+
+            @if (auth()->check())
+                <form action="{{ route('logout') }}" method="post" class="form-inline">
+                    @csrf
+                    <button class="btn btn-danger">Выйти</button>
+                </form>
+            @endif
+
         </ul>
     </header>
 </div>
