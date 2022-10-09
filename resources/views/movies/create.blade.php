@@ -30,6 +30,32 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
+
+
+            <div class="form-group">
+                <label for="">{{ __('validation.attributes.genres') }}</label>
+                @foreach($genres as $genre)
+                    <div class="form-check">
+                        <input type="checkbox" name="genres[]" value="{{ $genre->id }}"
+                               class="form-check-input @error('genres') is-invalid @enderror"> {{ $genre->name }}
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="form-group">
+                <label for="">{{ __('validation.attributes.actors') }}</label>
+                @foreach($actors as $actor)
+                    <div class="form-check">
+                        <input type="checkbox" name="actors[]" value="{{ $actor->id }}"
+                               class="form-check-input @error('actors') is-invalid @enderror"> {{ $actor->first_name }} {{ $actor->last_name }}
+                    </div>
+                @endforeach
+            </div>
+
+
+
+
             <button type="submit" class="btn btn-primary w-100 mt-3">Submit</button>
         </form>
     </div>

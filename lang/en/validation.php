@@ -167,15 +167,24 @@ return [
     */
 
     'attributes' => [
-        'name' => 'Name',
+        'name' => 'Имя',
         'email' => 'Email',
-        'tel' => 'Tel',
-        'title_movie' => 'Title Film',
-        'description' => 'Description',
-        'year' => 'Year',
+        'tel' => 'Телефон',
+        'title_movie' => 'Название фильма',
+        'description' => 'Описание фильма',
+        'year' => 'Год выпуска',
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
-        'checkbox' => 'Agree',
+        'checkbox' => 'Подтвердить',
+
+        'first_name' => 'Имя',
+        'last_name' => 'Фамилия',
+        'patronymic' => 'Отчество',
+        'birthday' => 'ДР',
+        'height' => 'Рост',
+
+        'genres' => 'Жанры',
+        'actors' => 'Актеры',
     ],
 
 ];
