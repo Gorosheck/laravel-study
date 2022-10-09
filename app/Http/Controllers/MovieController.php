@@ -45,8 +45,8 @@ class MovieController extends Controller
         $data = $request->validated();
         $movie->fill($data);
 
-        $movie->genres()->attach($data['genres']);
-        $movie->actors()->attach($data['actors']);
+        $movie->genres()->sync($data['genres']);
+        $movie->actors()->sync($data['actors']);
 
         $movie->save();
 
