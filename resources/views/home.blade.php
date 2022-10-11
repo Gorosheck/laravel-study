@@ -3,62 +3,73 @@
 @section('title-block')Главная@endsection
 
 @section('content')
-<h1>Главная страница</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam delectus dolor ducimus earum ipsa nesciunt quas ullam? Beatae commodi consequatur ea, enim est iste maiores non praesentium reiciendis voluptatem. Possimus.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam delectus dolor ducimus earum ipsa nesciunt quas ullam? Beatae commodi consequatur ea, enim est iste maiores non praesentium reiciendis voluptatem. Possimus.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam delectus dolor ducimus earum ipsa nesciunt quas ullam? Beatae commodi consequatur ea, enim est iste maiores non praesentium reiciendis voluptatem. Possimus.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam delectus dolor ducimus earum ipsa nesciunt quas ullam? Beatae commodi consequatur ea, enim est iste maiores non praesentium reiciendis voluptatem. Possimus.</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam delectus dolor ducimus earum ipsa nesciunt quas ullam? Beatae commodi consequatur ea, enim est iste maiores non praesentium reiciendis voluptatem. Possimus.</p>
+    <h1>Главная страница</h1>
 
+<div class="row mt-4">
+    <div class="col-md-8">
+        @if($movies->isEmpty())
+            <h2>Films not found</h2>
+        @endif
 
-    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-label="Slide 1" aria-current="true"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class=""></button>
+        @foreach($movies as $movie)
+            <article class="mb-3">
+                <h3 class="mb-1">Название фильма: {{ $movie->title_movie }}</h3>
+                <h3 class="mb-1">Год выпуска: {{ $movie->year }}</h3>
+                <p class="mb-1"><span><strong>Жанры фильма:</strong></span>
+                    @foreach($movie->genres as $genre)
+                        <span>{{ $genre->name }},</span>
+                    @endforeach
+                </p><br>
+                <hr>
+            </article>
+        @endforeach
+        <div>
+            {!! $movies->links() !!}
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
-
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                        <h1>Example headline.</h1>
-                        <p>Some representative placeholder content for the first slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
-
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
-                        <p>Some representative placeholder content for the second slide of the carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"></rect></svg>
-
-                <div class="container">
-                    <div class="carousel-caption text-end">
-                        <h1>One more for good measure.</h1>
-                        <p>Some representative placeholder content for the third slide of this carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
+
+    <div class="col-md-4">
+        <ul class="list-unstyled d-flex justify-content-start">
+            <form action="{{ route('home') }}">
+                <div class="input-group">
+                    <input class="form-control mb-2" type="text" placeholder="Название" name="name"
+                           value="{{ request()->get('name') }}">
+                </div>
+                <div class="input-group">
+                    <input class="form-control mb-2" type="text" placeholder="Год выпуска" name="year"
+                           value="{{ request()->get('year') }}">
+                </div>
+                <label for="genres">{{ __('validation.attributes.genres') }}</label>
+                @foreach($genres as $genre)
+                    <div class="form-check">
+                        <input type="checkbox"
+                               name="genres[]"
+                               value="{{ $genre->id }}"
+                               @if(in_array($genre->id, request()->get('genres', [])))
+                               checked
+                            @endif
+                        > {{ $genre->name }}
+                    </div>
+                @endforeach
+
+                <label for="actors">{{ __('validation.attributes.actors') }}</label>
+                @foreach($actors as $actor)
+                    <div class="form-check">
+                        <input type="checkbox"
+                               name="actors[]"
+                               value="{{ $actor->id }}"
+                               @if(in_array($actor->id, request()->get('actors', [])))
+                               checked
+                            @endif
+                        > {{ $actor->first_name }} {{ $actor->last_name }}
+                    </div>
+                @endforeach
+
+                <button class="btn btn-primary">Фильтровать</button>
+            </form>
+        </ul>
+    </div>
+</div>
 @endsection
+
+

@@ -34,7 +34,6 @@ class MovieController extends Controller
         $movie->save();
         $movie->genres()->attach($data['genres']);
         $movie->actors()->attach($data['actors']);
-
         session()->flash('success', 'Success!');
         return redirect()->route('movie.show', ['movie' => $movie->id]);
 
@@ -44,12 +43,9 @@ class MovieController extends Controller
     {
         $data = $request->validated();
         $movie->fill($data);
-
         $movie->genres()->sync($data['genres']);
         $movie->actors()->sync($data['actors']);
-
         $movie->save();
-
         session()->flash('success', 'Success!');
         return redirect()->route('movie.show', compact('movie'));
     }
@@ -57,7 +53,6 @@ class MovieController extends Controller
     public function list(Request $request)
     {
         $movies = Movie::all();
-
         return view('movies.list', compact('movies'));
     }
 
@@ -69,7 +64,6 @@ class MovieController extends Controller
     public function delete(Movie $movie)
     {
         $movie->delete();
-
         session()->flash('success', 'Deleted successfully!');
         return redirect()->route('movie.list');
     }

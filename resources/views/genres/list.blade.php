@@ -20,13 +20,17 @@
                 <td>
                     <a href="{{ route('genres.show', ['genre' => $genre->id]) }}">Смотреть</a>
                     <br>
+                    @can('edit', $genre)
                     <a href="{{ route('genres.edit', ['genre' => $genre->id]) }}">Редактировать</a>
+                    @endcan
+                    @can('delete', $genre)
                     <form action="{{ route('genres.delete', ['genre' => $genre->id]) }}" method="post">
                         @csrf
                         <button type="submit" class="btn btn-outline-danger">
                             Удалить
                         </button>
                     </form>
+                    @endcan
                 </td>
             </tr>
         @endforeach
