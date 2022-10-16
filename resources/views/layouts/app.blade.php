@@ -26,7 +26,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('movie.list') }}">Список фильмов</a></li>
+                        @can('create', \App\Models\Movie::class)
                         <li><a class="dropdown-item" href="{{ route('movie.create') }}">Добавить фильм</a></li>
+                        @endcan
                     </ul>
                 </li>
 
@@ -36,7 +38,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('genres.list') }}">Список жанров</a></li>
+                        @can('create', \App\Models\Genre::class)
                         <li><a class="dropdown-item" href="{{ route('genres.create.genre') }}">Добавить жанр</a></li>
+                        @endcan
                     </ul>
                 </li>
 
@@ -46,7 +50,9 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('actors.list') }}">Список актеров</a></li>
+                        @can('create', \App\Models\Actor::class)
                         <li><a class="dropdown-item" href="{{ route('actors.create.actor') }}">Добавить актера</a></li>
+                        @endcan
                     </ul>
                 </li>
             @endif

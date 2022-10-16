@@ -28,13 +28,17 @@
                 <td>
                     <a href="{{ route('actors.show', ['actor' => $actor->id]) }}">Смотреть</a>
                     <br>
+                    @can('edit', $actor)
                     <a href="{{ route('actors.edit', ['actor' => $actor->id]) }}">Редактировать</a>
+                    @endcan
+                    @can('delete', $actor)
                     <form action="{{ route('actors.delete', ['actor' => $actor->id]) }}" method="post">
                         @csrf
                         <button type="submit" class="btn btn-outline-danger">
                             Удалить
                         </button>
                     </form>
+                    @endcan
                 </td>
             </tr>
         @endforeach

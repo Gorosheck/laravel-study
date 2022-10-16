@@ -6,6 +6,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\UserController;
+use App\Models\Actor;
+use App\Models\Genre;
+use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
@@ -50,13 +53,17 @@ Route::get('/verify-email/{id}/{hash}', [UserController::class, 'verifyEmail'])
 
 Route::group(['prefix' => '/genres', 'as' => 'genres.', 'middleware' => 'auth'], function () {
     Route::get('/create', [GenreController::class, 'createGenre'])
-        ->name('create.genre');
+        ->name('create.genre')
+        ->middleware('can:create,' . Genre::class);
+
     Route::post('/create', [GenreController::class, 'create'])
-        ->name('create');
+        ->name('create')
+        ->middleware('can:create,' . Genre::class);
+
     Route::get('', [GenreController::class, 'list'])
         ->name('list');
 
-    Route::group(['prefix' => '/{genre}/edit'], function () {
+    Route::group(['prefix' => '/{genre}/edit', 'middleware' => 'can:edit,genre'], function () {
         Route::get('', [GenreController::class, 'editGenre'])
             ->name('edit.genre');
         Route::post('', [GenreController::class, 'edit'])
@@ -72,13 +79,17 @@ Route::group(['prefix' => '/genres', 'as' => 'genres.', 'middleware' => 'auth'],
 
 Route::group(['prefix' => '/actors', 'as' => 'actors.', 'middleware' => 'auth'], function () {
     Route::get('/create', [ActorController::class, 'createActor'])
-        ->name('create.actor');
+        ->name('create.actor')
+        ->middleware('can:create,' . Actor::class);
+
     Route::post('/create', [ActorController::class, 'create'])
-        ->name('create');
+        ->name('create')
+        ->middleware('can:create,' . Actor::class);
+
     Route::get('', [ActorController::class, 'list'])
         ->name('list');
 
-    Route::group(['prefix' => '/{actor}/edit'], function () {
+    Route::group(['prefix' => '/{actor}/edit', 'middleware' => 'can:edit,actor'], function () {
         Route::get('', [ActorController::class, 'editActor'])
             ->name('edit.actor');
         Route::post('', [ActorController::class, 'edit'])
@@ -93,21 +104,23 @@ Route::group(['prefix' => '/actors', 'as' => 'actors.', 'middleware' => 'auth'],
 });
 
 
-Route::group(['prefix' => '/movies', 'as' => 'movie.'], function() {
+Route::group(['prefix' => '/movies', 'as' => 'movie.', 'middleware' => 'auth'], function() {
     Route::get('', [MovieController::class, 'list'])
         ->name('list');
 
     Route::get('/create', [MovieController::class, 'createForm'])
-        ->name('create.form');
+        ->name('create.form')
+        ->middleware('can:create,' . Movie::class);
 
     Route::post('/create', [MovieController::class, 'create'])
-        ->name('create');
+        ->name('create')
+        ->middleware('can:create,' . Movie::class);
 
     Route::get('/{movie}', [MovieController::class, 'show'])
         ->name('show');
 
 
-    Route::group(['prefix' => '/{movie}/edit'], function () {
+    Route::group(['prefix' => '/{movie}/edit', 'middleware' => 'can:edit,movie'], function () {
         Route::get('', [MovieController::class, 'editForm'])
             ->name('edit.form');
 

@@ -24,7 +24,6 @@ class ActorController extends Controller
         $data = $request->validated();
         $actor = new Actor($data);
         $actor->save();
-
         session()->flash('success', 'Actor create successfully!');
         return redirect()->route('actors.list', ['actor' => $actor->id]);
     }
@@ -34,7 +33,6 @@ class ActorController extends Controller
         $data = $request->validated();
         $actor->fill($data);
         $actor->save();
-
         session()->flash('success', 'Actor edited successfully!');
         return redirect()->route('actors.list', ['actor' => $actor->id]);
     }
@@ -42,7 +40,6 @@ class ActorController extends Controller
     public function list(Request $request)
     {
         $actors = Actor::query()->paginate(20);
-
         return view('actors.list', ['actors' => $actors]);
     }
 
@@ -54,7 +51,6 @@ class ActorController extends Controller
     public function delete(Actor $actor)
     {
         $actor->delete();
-
         session()->flash('success', 'Actor deleted successfully!');
         return redirect()->route('actors.list');
     }
