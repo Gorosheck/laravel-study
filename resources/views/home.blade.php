@@ -20,6 +20,10 @@
                         <span>{{ $genre->name }},</span>
                     @endforeach
                 </p><br>
+                @can('edit', $movie)
+                    <p><a href="{{ route('movie.edit.form', ['movie' => $movie->id]) }}">Редактировать</a></p>
+                @endcan
+                <br>
                 <hr>
             </article>
         @endforeach
