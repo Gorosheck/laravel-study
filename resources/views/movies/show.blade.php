@@ -19,4 +19,7 @@
     <p class="mb-1">Добавиль пользователь {{ $movie->user->name }} с ID: {{ $movie->user->id }}</p>
     <p>{!! nl2br(strip_tags($movie->description)) !!}</p>
 
+    @can('edit', $movie)
+        <p><a href="{{ route('movie.edit.form', ['movie' => $movie->id]) }}">Редактировать</a></p>
+    @endcan
 @endsection

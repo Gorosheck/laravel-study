@@ -14,6 +14,7 @@
     <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link active" aria-current="page">Главная</a></li>
+            <li class="nav-item"><a href="{{ route('login-history-list') }}" class="nav-link" aria-current="page">История входов</a></li>
             <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">О компании</a></li>
             <li class="nav-item"><a href="{{ route('contacts') }}" class="nav-link">Контакты</a></li>
             <li class="nav-item"><a href="{{ route('sign-up.form') }}" class="nav-link">Регистрация</a></li>

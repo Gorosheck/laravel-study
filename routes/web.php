@@ -47,6 +47,8 @@ Route::post('/sign-in', [AuthController::class, 'signIn'])
     ->name('sign-in');
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
+Route::get('/login-history', [MainController::class, 'LoginHistory'])
+    ->name('login-history-list');
 
 Route::get('/verify-email/{id}/{hash}', [UserController::class, 'verifyEmail'])
     ->name('verify.email');
@@ -104,7 +106,7 @@ Route::group(['prefix' => '/actors', 'as' => 'actors.', 'middleware' => 'auth'],
 });
 
 
-Route::group(['prefix' => '/movies', 'as' => 'movie.', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => '/movies', 'as' => 'movie.', 'middleware' => ['auth', 'user-verify']], function() {
     Route::get('', [MovieController::class, 'list'])
         ->name('list');
 

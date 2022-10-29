@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserLoggedIn;
 use App\Http\Requests\User\SignInRequest;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -17,10 +16,12 @@ class AuthController extends Controller
     public function signIn(SignInRequest $request)
     {
         $credentials = $request->validated();
-        $check = function ($user) {
-            return $user->email_verified_at !== null;
-        };
-        if (Auth::attemptWhen($credentials, $check)) {
+
+        if (Auth::attemptWhen($credentials)) {
+            $user = auth()->user();
+            $event = new UserLoggedIn($user, $request);
+            event($event);
+
             session()->flash('success', 'Signed In');
             return redirect()->route('home');
         }

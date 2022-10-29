@@ -20,8 +20,8 @@
         @foreach($actors as $actor)
             <tr>
                 <th scope="row">{{ $actor->id }}</th>
-                <td>{{ $actor->firstname }}</td>
-                <td>{{ $actor->lastname }}</td>
+                <td>{{ $actor->first_name }}</td>
+                <td>{{ $actor->last_name }}</td>
                 <td>{{ $actor->patronymic }}</td>
                 <td>{{ $actor->birthday }}</td>
                 <td>{{ $actor->height }}</td>
