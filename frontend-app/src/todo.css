@@ -15,7 +15,7 @@ body {
 
 .root {
   padding: 1rem;
-  max-width: 50%;
+  max-width: 80%;
   margin: 0 auto;
   text-align: center;
   background: #333;
@@ -39,9 +39,9 @@ h1 {
 }
 
 .todo {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-start; */
 }
 
 input {
@@ -86,7 +86,9 @@ ul {
 }
 
 li {
-  width: 450px;
+display: flex;
+  width: 100%;
+  justify-content: space-between;
   padding: 0.85em;
   text-align: left;
   margin-bottom: 0.5rem;
@@ -106,3 +108,8 @@ li:last-child {
   color: #cf972e;
   letter-spacing: 0.2rem;
 }
+
+.itemIsDone {
+   background: #723a20;
+   text-decoration: line-through;
+ }

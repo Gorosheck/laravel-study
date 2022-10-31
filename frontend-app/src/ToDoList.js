@@ -8,13 +8,24 @@ function ToDoList() {
       setInput(e.target.value);
    }
 
-   const addItem = () => {
-      if (input !== '') {
-         setItems([...input, items]);
-         setInput('');
-      } else
+   const addItem = (e) => {
+      e.preventDefault();
+
+      if (input === '') {
          return;
-   };
+      }
+
+      const newItems = [...items, { value: input, isDone: false }];
+      setItems(newItems);
+      setInput('');
+   }
+
+   const toggleComplete = (index) => {
+      const newItems = [...items];
+      newItems[index].isDone = !newItems[index].isDone;
+      setItems(newItems);
+   }
+
 
    const deleteItem = (text) => {
       const newItems = items.filter((item) => {
@@ -23,39 +34,58 @@ function ToDoList() {
       setItems(newItems);
    };
 
+   const deleteAll = (newItems) => {
+      if (items.value !== null) {
+         return (newItems = []);
+      }
+   }
+
+
 
 
    return (
       <div className='root'>
-
          <h1>Список дел</h1>
-
          <div className='input-wrapper'>
-            <input type='text' name='todo' placeholder='Введите дело' value={input} onChange={onInputChange} />
+            <input type='text' name='todo' className='highload0' placeholder='Введите дело' value={input} onChange={onInputChange} />
             <button className='add-button' onClick={addItem}>Добавить</button>
          </div>
 
          {items?.length > 0 ? (
             <ul className='todo-list'>
-               {items.map((item, index) => (
-                  <div className='todo' >
-                     <input type='checkbox' />
-                     <li key={index}> {item} </li>
-                     <button className='delete-button'
-                        onClick={() => {
-                           deleteItem(item);
-                        }}
-                     >Удалить</button>
-                  </div>
-               ))}
+
+               <div className='todo' >
+                  {items.map((item, index) => <Item key={index} toggle={() => toggleComplete(index)} value={item.value} isDone={item.isDone} />)}
+               </div>
+
             </ul >
          ) : (
             <div className="empty">
                <p>Планируется полежать на диване</p>
             </div>
          )}
+         <button className='delete-button'
+            onClick={() => {
+               deleteAll(items);
+            }}
+         >Удалить все</button>
       </div >
    );
+
+   function Item({ value, isDone, toggle }) {
+      return (
+         <li className={`${isDone ? 'itemIsDone' : ''}`}>
+            <input onChange={toggle} className="form-check-input me-1" checked={isDone} type="checkbox" />
+            {value}
+            <button className='delete-button'
+               onClick={() => {
+                  deleteItem(Item);
+               }}
+            >Удалить</button>
+         </li>
+      );
+   }
+
 }
 
 export default ToDoList;
