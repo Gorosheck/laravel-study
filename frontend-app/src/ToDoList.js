@@ -1,0 +1,81 @@
+import { useState } from 'react';
+
+function ToDoList() {
+   const [input, setInput] = useState('');
+   const [items, setItems] = useState([]);
+
+   const onInputChange = (e) => {
+      setInput(e.target.value);
+   }
+
+   const addItem = (e) => {
+      e.preventDefault();
+
+      if (input === '') {
+         return;
+      }
+
+      const newItems = [...items, { value: input, isDone: false }];
+      setItems(newItems);
+      setInput('');
+   }
+
+   const toggleComplete = (index) => {
+      const newItems = [...items];
+      newItems[index].isDone = !newItems[index].isDone;
+      setItems(newItems);
+   }
+
+
+   const deleteItem = (itemIndex) => {
+      const newItems = [...items].filter((item, index) => index !== itemIndex);
+      setItems(newItems);
+   }
+
+
+
+   const deleteAll = () => {
+      setItems([]);
+   }
+
+
+
+
+   return (
+      <div className='root'>
+         <h1>Список дел</h1>
+         <div className='input-wrapper'>
+            <input type='text' name='todo' className='highload0' placeholder='Введите дело' value={input} onChange={onInputChange} />
+            <button className='add-button' onClick={addItem}>Добавить</button>
+         </div>
+
+         {items?.length > 0 ? (
+            <ul className='todo-list'>
+
+               <div className='todo' >
+                  {items.map((item, index) => <Item key={index} toggle={() => toggleComplete(index)} deleteItem={() => deleteItem(index)} value={item.value} isDone={item.isDone} />)}
+               </div>
+
+            </ul >
+         ) : (
+            <div className="empty">
+               <p>Планируется полежать на диване</p>
+            </div>
+         )}
+         <button className='deleteButton' onClick={deleteAll}>Удалить все</button>
+      </div >
+   );
+
+   function Item({ value, isDone, toggle, deleteItem }) {
+      return (
+         <li className={`${isDone ? 'itemIsDone' : ''}`}>
+            <input onChange={toggle} className="form-check-input me-1" checked={isDone} type="checkbox" />
+            {value}
+            <button className='delete-button' onClick={deleteItem}>Удалить</button>
+         </li>
+      );
+   }
+
+}
+
+export default ToDoList;
