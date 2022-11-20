@@ -1,51 +1,56 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect, useContext } from "react";
+import NotificationContext from "./context/NotificationContext";
 
-function ToDoList() {
-   const [input, setInput] = useState('');
-   const [items, setItems] = useState([]);
+function ToDoList(props) {
+   const { save, load } = props;
 
-   const onInputChange = (e) => {
-      setInput(e.target.value);
-   }
+   const input = useRef('');
+   const [items, setItems] = useState(JSON.parse(load()) ?? []);
+   const context = useContext(NotificationContext);
+
+   useEffect(() => {
+      save(JSON.stringify(items));
+   }, [items]);
 
    const addItem = (e) => {
       e.preventDefault();
 
-      if (input === '') {
+      if (input.current.value === '') {
+         context.danger('Поле пустое');
          return;
       }
 
-      const newItems = [...items, { value: input, isDone: false }];
+      const newItems = [...items, { value: input.current.value, isDone: false }];
       setItems(newItems);
-      setInput('');
+      input.current.value = '';
+      input.current.blur();
+      context.success('Добавили дело');
    }
 
    const toggleComplete = (index) => {
       const newItems = [...items];
       newItems[index].isDone = !newItems[index].isDone;
       setItems(newItems);
+      context.success('Дело выполнено');
    }
-
 
    const deleteItem = (itemIndex) => {
-      const newItems = [...items].filter((item, index) => index !== itemIndex);
+      const newItems = items.filter((item, index) => index !== itemIndex);
       setItems(newItems);
+      context.warning('Удалили дело')
    }
-
-
 
    const deleteAll = () => {
       setItems([]);
+      context.danger('Все дела удалены');
    }
-
-
 
 
    return (
       <div className='root'>
          <h1>Список дел</h1>
          <div className='input-wrapper'>
-            <input type='text' name='todo' className='highload0' placeholder='Введите дело' value={input} onChange={onInputChange} />
+            <input type='text' name='todo' className='highload0' placeholder='Введите дело' ref={input} />
             <button className='add-button' onClick={addItem}>Добавить</button>
          </div>
 
