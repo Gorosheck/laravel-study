@@ -1,24 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from "react";
+import NotificationContext from "./context/NotificationContext";
 
-function TemperatureControl() {
+function TemperatureControl({ save, load, initial = 10 }) {
 
-   const [count, setCount] = useState(10);
+   const [count, setCount] = useState(parseInt(load() ?? initial));
+   const context = useContext(NotificationContext);
 
    useEffect(() => {
       document.title = `Сейчас температура ${count} градусов`
+      save(count);
    });
 
+
    const increase = () => {
-      if (count < 30) {
-         setCount(count + 1);
+      setCount(count >= 30 ? 30 : count + 1);
+      if (30 > count) {
+         context.success('Добавили 1 градус');
+         setCount(count >= 30 ? 30 : count + 1);
+      } else {
+         context.warning('Не добавили');
       }
    }
 
    const decrease = () => {
+      setCount(count ? count - 1 : 0);
       if (count > 0) {
-         setCount(count - 1);
+         context.warning('Убавили 1 градус');
+         setCount(count ? count - 1 : 0);
+      } else {
+         context.warning('Не убавили');
       }
    }
+
 
    return (
       <div className="app-container">
